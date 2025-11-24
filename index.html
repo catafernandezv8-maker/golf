@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Bacileros Golf Championship 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-field: #2d5016;
+            --green-light: #4a7c2c;
+            --gold: #d4af37;
+            --cream: #f8f6f0;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--green-field) 0%, #1a3a0f 100%);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo-badge {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInScale 1.2s ease-out;
+            border: 5px solid var(--gold);
+        }
+
+        .logo-badge img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .edition {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin-bottom: 40px;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .hero-section {
+            background: linear-gradient(180deg, rgba(74, 124, 44, 0.1) 0%, rgba(74, 124, 44, 0.05) 100%);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .invitation-text {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--cream);
+            font-weight: 300;
+        }
+
+        .invitation-text strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .event-details {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .detail-item {
+            text-align: center;
+            animation: scaleIn 0.6s ease-out backwards;
+        }
+
+        .detail-item:nth-child(1) { animation-delay: 0.6s; }
+        .detail-item:nth-child(2) { animation-delay: 0.7s; }
+        .detail-item:nth-child(3) { animation-delay: 0.8s; }
+
+        .detail-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 60px 0;
+            animation: fadeInUp 1s ease-out 0.9s backwards;
+        }
+
+        .register-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--gold) 0%, #f4d978 100%);
+            color: var(--green-field);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            border: 3px solid var(--gold);
+            cursor: pointer;
+        }
+
+        .register-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, #f4d978 0%, var(--gold) 100%);
+        }
+
+        .registration-section {
+            margin: 60px 0;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(74, 124, 44, 0.2);
+            padding: 50px;
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(248, 246, 240, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: var(--cream);
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(248, 246, 240, 0.15);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--gold) 0%, #f4d978 100%);
+            color: var(--green-field);
+            border: 3px solid var(--gold);
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, #f4d978 0%, var(--gold) 100%);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid #4caf50;
+            color: #4caf50;
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 2px solid #f44336;
+            color: #f44336;
+            display: block;
+        }
+
+        .prizes-section {
+            margin-top: 80px;
+            animation: fadeInUp 1s ease-out 1.1s backwards;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--gold);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+            margin: 20px auto 0;
+        }
+
+        .prizes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .prize-card {
+            background: rgba(74, 124, 44, 0.2);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .prize-card:nth-child(1) { animation-delay: 1.2s; }
+        .prize-card:nth-child(2) { animation-delay: 1.3s; }
+        .prize-card:nth-child(3) { animation-delay: 1.4s; }
+        .prize-card:nth-child(4) { animation-delay: 1.5s; }
+
+        .prize-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+            background: rgba(74, 124, 44, 0.3);
+        }
+
+        .prize-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .prize-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 10px;
+        }
+
+        .sponsors-section {
+            text-align: center;
+            padding: 60px 0;
+            margin-top: 40px;
+            border-top: 2px solid rgba(212, 175, 55, 0.3);
+            animation: fadeIn 1s ease-out 1.6s backwards;
+        }
+
+        .sponsors-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .sponsors-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .sponsor-logo {
+            padding: 20px 40px;
+            background: rgba(248, 246, 240, 0.1);
+            border-radius: 10px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .sponsor-logo:hover {
+            background: rgba(248, 246, 240, 0.2);
+            border-color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: rgba(248, 246, 240, 0.6);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .invitation-text {
+                font-size: 1.1rem;
+            }
+
+            .event-details {
+                gap: 30px;
+            }
+
+            .prizes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sponsors-logos {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo-badge">
+                <img src="grupo-bacileros.jpeg" alt="Los Bacileros Golf Team">
+            </div>
+            <h1>Los Bacileros</h1>
+            <div class="edition">Segunda Edición</div>
+        </header>
+
+        <main>
+            <section class="hero-section">
+                <div class="hero-content">
+                    <p class="invitation-text">
+                        ¡Se viene la <strong>Segunda Edición</strong> del Campeonato Los Bacileros y este año 
+                        venimos con más energía, más competencia y más pasión que nunca! 🏌️‍♂️
+                    </p>
+                    <p class="invitation-text">
+                        Después del éxito rotundo de nuestra primera edición, nos preparamos para llevar 
+                        este torneo a un nivel superior. <strong>Más premios, más adrenalina y más 
+                        camaradería</strong> en el green. Este es el momento de demostrar quién tiene el 
+                        swing perfecto y la precisión de un campeón.
+                    </p>
+                    <p class="invitation-text">
+                        No te quedes fuera de la mejor experiencia golfística del año. ¡Los Bacileros 
+                        te esperan para hacer historia juntos! ⛳
+                    </p>
+
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <div class="detail-label">Fecha</div>
+                            <div class="detail-value">Domingo 13 de Diciembre</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📍</div>
+                            <div class="detail-label">Lugar</div>
+                            <div class="detail-value">Talagante</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🕗</div>
+                            <div class="detail-label">Hora</div>
+                            <div class="detail-value">8:00 AM</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cta-section">
+                <button class="register-button" onclick="showRegistrationForm()">¡Inscríbete Ahora!</button>
+            </div>
+
+            <section class="registration-section" id="registrationForm" style="display: none;">
+                <h2 class="section-title">Formulario de Inscripción</h2>
+                <div class="form-container">
+                    <form id="inscriptionForm" action="https://formspree.io/f/xanyrgeo" method="POST">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo *</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Teléfono *</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="handicap">Handicap (si aplica)</label>
+                            <input type="text" id="handicap" name="handicap" placeholder="Ej: 18">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experiencia">Nivel de Experiencia *</label>
+                            <select id="experiencia" name="experiencia" required>
+                                <option value="">Selecciona tu nivel</option>
+                                <option value="principiante">Principiante</option>
+                                <option value="intermedio">Intermedio</option>
+                                <option value="avanzado">Avanzado</option>
+                                <option value="profesional">Profesional</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comentarios">Comentarios Adicionales</label>
+                            <textarea id="comentarios" name="comentarios" rows="4" placeholder="¿Algo que quieras agregar?"></textarea>
+                        </div>
+
+                        <input type="hidden" name="_subject" value="Nueva Inscripción - Campeonato Los Bacileros">
+                        <input type="hidden" name="_cc" value="catafernandezv8@gmail.com">
+
+                        <button type="submit" class="submit-button">Confirmar Inscripción</button>
+                    </form>
+
+                    <div id="formMessage" class="form-message"></div>
+                </div>
+            </section>
+
+            <section class="prizes-section">
+                <h2 class="section-title">Premios del Campeonato</h2>
+                <div class="prizes-grid">
+                    <div class="prize-card">
+                        <div class="prize-icon">🍺</div>
+                        <div class="prize-title">2 Cajas de Extralige</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">🥃</div>
+                        <div class="prize-title">Caja de Pisco</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">⛳</div>
+                        <div class="prize-title">Caja de Pelotas de Golf</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">🧤</div>
+                        <div class="prize-title">Guantes de Golf</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sponsors-section">
+                <h3 class="sponsors-title">Auspiciadores</h3>
+                <div class="sponsors-logos">
+                    <div class="sponsor-logo">BULK</div>
+                    <div class="sponsor-logo">FG</div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 Los Bacileros Golf Championship - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        function showRegistrationForm() {
+            const form = document.getElementById('registrationForm');
+            form.style.display = 'block';
+            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Manejo del formulario
+        const form = document.getElementById('inscriptionForm');
+        const messageDiv = document.getElementById('formMessage');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = form.querySelector('.submit-button');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Enviando...';
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    messageDiv.className = 'form-message success';
+                    messageDiv.textContent = '¡Inscripción exitosa! Recibirás un correo de confirmación pronto. ¡Nos vemos en el green! ⛳';
+                    form.reset();
+                } else {
+                    throw new Error('Error en el envío');
+                }
+            } catch (error) {
+                messageDiv.className = 'form-message error';
+                messageDiv.textContent = 'Hubo un problema al enviar tu inscripción. Por favor, intenta nuevamente.';
+            } finally {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Smooth scroll para mejor experiencia
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
